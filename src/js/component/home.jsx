@@ -1,10 +1,16 @@
 import React from "react";
-import { Todolist } from "./Todolist.jsx";
+import { FetchToDoList } from "./FetchToDoList";
+import { Todolist } from "./Todolist";
 const Home = () => {
 	return (
+		<>
 		<div className="container">
-			<Todolist />
+			<FetchToDoList/>
 		</div>
+		{/*<div className="container">
+			<Todolist/>
+		</div>*/}
+		</>
 	);
 };
 
