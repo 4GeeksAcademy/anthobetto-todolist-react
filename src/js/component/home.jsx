@@ -7,9 +7,6 @@ const Home = () => {
 		<div className="container">
 			<FetchToDoList/>
 		</div>
-		{/*<div className="container">
-			<Todolist/>
-		</div>*/}
 		</>
 	);
 };
