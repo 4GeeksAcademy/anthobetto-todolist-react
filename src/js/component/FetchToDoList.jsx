@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export const FetchToDoList = () => {
     const host = 'https://playground.4geeks.com/todo';
-    const user = "anthobetto";
+    const user = "srzerosss";
     const [newActivity, setNewActivity] = useState([]);
     const [inputValue, setInputValue] = useState("");  // Manejo del valor del input
 
@@ -13,31 +13,31 @@ export const FetchToDoList = () => {
         };
         const response = await fetch(uri, options);
         if (!response.ok) {
-            return;
+            return createUser()
         }
         const data = await response.json();
         setNewActivity(data.todos);
     };
 
     const postActivity = async () => {
-            const dataToSend = {
-                "label": inputValue,
-                "is_done": false
-            };
-            const uri = `${host}/todos/${user}`;
-            const options = {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dataToSend)
-            };
-            const response = await fetch(uri, options);
-            if (!response.ok) {
-                return;
-            }
-            setInputValue("");
-            getActivities(); 
+        const dataToSend = {
+            "label": inputValue,
+            "is_done": false
+        };
+        const uri = `${host}/todos/${user}`;
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataToSend)
+        };
+        const response = await fetch(uri, options);
+        if (!response.ok) {
+            return;
+        }
+        setInputValue("");
+        getActivities();
     };
 
     const deleteActivity = async (designateNumber) => {
@@ -52,9 +52,23 @@ export const FetchToDoList = () => {
         getActivities();
     };
 
+    const createUser = async () => {
+        const uri = `${host}/users/${user}`;
+        const options = {
+            method: 'POST'
+        }
+        const response = await fetch(uri, options)
+        if (!response.ok) {
+            return
+        }
+        getActivities()
+
+    }
+
     useEffect(() => {
-        getActivities();
+        getActivities()
     }, []);
+    useEffect(() => { }, [newActivity])
 
     return (
         <div className="container mt-5">
